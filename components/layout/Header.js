@@ -146,7 +146,7 @@ const Header = () => {
               data-booking-trigger
               className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 py-2.5 rounded-full font-semibold hover:shadow-lg hover:shadow-blue-500/50 transition-all transform hover:scale-105 cursor-pointer"
             >
-              Book Visit
+              Start Your Journey
             </button>
             <a
               href="https://pages.razorpay.com/pl_Khn50cJnC1of3R/view"
@@ -193,7 +193,7 @@ const Header = () => {
                 data-booking-trigger
                 className="bg-gradient-to-r from-orange-500 to-pink-500 text-white px-6 py-4 rounded-xl font-semibold text-center hover:shadow-lg transition-all cursor-pointer mt-4 active:scale-95"
               >
-                Book Visit
+                Start Your Journey
               </button>
               <a
                 href="https://pages.razorpay.com/pl_Khn50cJnC1of3R/view"

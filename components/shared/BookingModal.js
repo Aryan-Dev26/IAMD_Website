@@ -109,7 +109,7 @@ export default function BookingModal({ isOpen, onClose }) {
 
         {/* Header */}
         <div className="bg-gradient-to-r from-orange-500 to-pink-500 p-8 text-white rounded-t-3xl">
-          <h2 className="text-3xl font-bold mb-2">Register for Camp</h2>
+          <h2 className="text-3xl font-bold mb-2">Start Your Journey</h2>
           <p className="text-white/90">Choose your preferred way to connect with us</p>
         </div>
 

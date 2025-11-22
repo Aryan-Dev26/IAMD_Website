@@ -20,7 +20,7 @@ export default function MobileQuickActions() {
     },
     {
       icon: Calendar,
-      label: 'Book Visit',
+      label: 'Start Journey',
       onClick: () => {
         // Trigger booking modal
         const bookButton = document.querySelector('[data-booking-trigger]');

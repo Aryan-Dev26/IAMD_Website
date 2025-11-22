@@ -57,7 +57,7 @@ export default function ForParents() {
     },
     {
       question: 'How can I register my child?',
-      answer: 'You can register by clicking the "Book Visit" button on our homepage, calling us directly, or visiting our facility at Manav Mandir, Solan.',
+      answer: 'You can register by clicking the "Start Your Journey" button on our homepage, calling us directly, or visiting our facility at Manav Mandir, Solan.',
     },
     {
       question: 'Are the services free?',
@@ -133,7 +133,7 @@ export default function ForParents() {
               <Calendar className="w-6 h-6 text-white" />
             </div>
             <div>
-              <p className="text-sm text-gray-600">Book Visit</p>
+              <p className="text-sm text-gray-600">Start Journey</p>
               <p className="font-semibold text-gray-900">Schedule Now</p>
             </div>
           </Link>

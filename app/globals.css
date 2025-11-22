@@ -275,3 +275,12 @@ button:active, a:active {
     padding-right: max(0px, env(safe-area-inset-right));
   }
 }
+
+/* Better input text visibility */
+input, textarea, select {
+  color: #111827 !important; /* Dark text for form inputs */
+}
+
+input::placeholder, textarea::placeholder {
+  color: #9CA3AF !important; /* Medium grey for placeholders */
+}
