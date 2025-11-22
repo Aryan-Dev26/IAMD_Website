@@ -2,6 +2,8 @@ import Hero from '@/components/home/Hero';
 import AboutPreview from '@/components/home/AboutPreview';
 import ServicesGrid from '@/components/home/ServicesGrid';
 import FacilityShowcase from '@/components/home/FacilityShowcase';
+import PicnicGallery from '@/components/home/PicnicGallery';
+import SuccessStories from '@/components/home/SuccessStories';
 import Testimonials from '@/components/home/Testimonials';
 import CTASection from '@/components/home/CTASection';
 import ScrollReveal from '@/components/shared/ScrollReveal';
@@ -28,6 +30,18 @@ export default function Home() {
       <ScrollReveal animation="fadeInUp" delay={100}>
         <section id="facility">
           <FacilityShowcase />
+        </section>
+      </ScrollReveal>
+      
+      <ScrollReveal animation="fadeInUp" delay={100}>
+        <section id="gallery">
+          <PicnicGallery />
+        </section>
+      </ScrollReveal>
+      
+      <ScrollReveal animation="fadeInUp" delay={100}>
+        <section id="success-stories">
+          <SuccessStories />
         </section>
       </ScrollReveal>
       
