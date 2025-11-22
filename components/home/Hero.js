@@ -10,7 +10,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 overflow-hidden">
+    <div className="relative min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 overflow-hidden pt-20">
       {/* Animated Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-20 left-20 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse"></div>
@@ -18,31 +18,9 @@ const Hero = () => {
         <div className="absolute bottom-20 left-1/2 w-72 h-72 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse delay-2000"></div>
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-16">
-        {/* Navigation */}
-        <nav className={`flex justify-between items-center mb-32 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10'}`}>
-          <div className="flex items-center space-x-2">
-            <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-pink-500 rounded-lg flex items-center justify-center">
-              <Heart className="w-6 h-6 text-white" fill="white" />
-            </div>
-            <div>
-              <h1 className="text-2xl font-bold text-white">IAMD</h1>
-              <p className="text-xs text-gray-400">Since 1992</p>
-            </div>
-          </div>
-          <div className="hidden md:flex space-x-8 text-gray-300">
-            <a href="#about" className="hover:text-orange-400 transition-colors">About</a>
-            <a href="#services" className="hover:text-orange-400 transition-colors">Services</a>
-            <a href="#warriors" className="hover:text-orange-400 transition-colors">Warriors</a>
-            <a href="#contact" className="hover:text-orange-400 transition-colors">Contact</a>
-          </div>
-          <button className="bg-gradient-to-r from-orange-500 to-pink-500 text-white px-6 py-2 rounded-full hover:shadow-lg hover:shadow-orange-500/50 transition-all transform hover:scale-105">
-            Book Visit
-          </button>
-        </nav>
-
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         {/* Hero Content */}
-        <div className="grid md:grid-cols-2 gap-16 items-center mt-16">
+        <div className="grid md:grid-cols-2 gap-16 items-center">
           {/* Left Content */}
           <div className={`space-y-6 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
             <div className="inline-block">
