@@ -31,24 +31,24 @@ const Footer = () => {
             <h4 className="text-lg font-bold mb-4">Quick Links</h4>
             <ul className="space-y-2">
               <li>
-                <Link href="/about" className="text-sm text-gray-300 hover:text-orange-400 transition-colors">
+                <a href="#about" className="text-sm text-gray-300 hover:text-orange-400 transition-colors cursor-pointer">
                   About Us
-                </Link>
+                </a>
               </li>
               <li>
-                <Link href="/services" className="text-sm text-gray-300 hover:text-orange-400 transition-colors">
+                <a href="#services" className="text-sm text-gray-300 hover:text-orange-400 transition-colors cursor-pointer">
                   Our Services
-                </Link>
+                </a>
               </li>
               <li>
-                <Link href="/facility" className="text-sm text-gray-300 hover:text-orange-400 transition-colors">
+                <a href="#facility" className="text-sm text-gray-300 hover:text-orange-400 transition-colors cursor-pointer">
                   Facility
-                </Link>
+                </a>
               </li>
               <li>
-                <Link href="/warriors" className="text-sm text-gray-300 hover:text-orange-400 transition-colors">
+                <a href="#warriors" className="text-sm text-gray-300 hover:text-orange-400 transition-colors cursor-pointer">
                   Warriors
-                </Link>
+                </a>
               </li>
               <li>
                 <Link href="/blog" className="text-sm text-gray-300 hover:text-orange-400 transition-colors">
@@ -68,22 +68,22 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-sm text-gray-300 hover:text-orange-400 transition-colors">
+                <a href="#contact" className="text-sm text-gray-300 hover:text-orange-400 transition-colors cursor-pointer">
                   Contact Us
-                </Link>
+                </a>
               </li>
               <li>
-                <a href="#" className="text-sm text-gray-300 hover:text-orange-400 transition-colors">
+                <a href="#" className="text-sm text-gray-300 hover:text-orange-400 transition-colors cursor-pointer">
                   FAQs
                 </a>
               </li>
               <li>
-                <a href="#" className="text-sm text-gray-300 hover:text-orange-400 transition-colors">
+                <a href="#" className="text-sm text-gray-300 hover:text-orange-400 transition-colors cursor-pointer">
                   Privacy Policy
                 </a>
               </li>
               <li>
-                <a href="#" className="text-sm text-gray-300 hover:text-orange-400 transition-colors">
+                <a href="#" className="text-sm text-gray-300 hover:text-orange-400 transition-colors cursor-pointer">
                   Terms of Service
                 </a>
               </li>
