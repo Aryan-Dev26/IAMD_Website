@@ -23,19 +23,21 @@ export default function PageLoader() {
         <div className="relative">
           {/* Pulsing circles */}
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-32 h-32 bg-white/20 rounded-full animate-ping" />
+            <div className="w-40 h-40 bg-white/20 rounded-full animate-ping" />
           </div>
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-24 h-24 bg-white/30 rounded-full animate-pulse" />
+            <div className="w-32 h-32 bg-white/30 rounded-full animate-pulse" />
           </div>
           
-          {/* Heart icon */}
-          <div className="relative z-10 w-32 h-32 flex items-center justify-center">
-            <Heart 
-              className="w-16 h-16 text-white animate-pulse" 
-              fill="white"
-              strokeWidth={2}
-            />
+          {/* IAMD Logo */}
+          <div className="relative z-10 w-40 h-40 flex items-center justify-center">
+            <div className="w-28 h-28 bg-white rounded-full p-4 animate-pulse">
+              <img
+                src="/images/IAMD_LOGO.jpg"
+                alt="IAMD Logo"
+                className="w-full h-full object-contain"
+              />
+            </div>
           </div>
         </div>
         

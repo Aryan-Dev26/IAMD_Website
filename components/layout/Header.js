@@ -53,12 +53,16 @@ const Header = () => {
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2 group">
-            <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-pink-500 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
-              <Heart className="w-6 h-6 text-white" fill="white" />
+          <Link href="/" className="flex items-center space-x-3 group">
+            <div className="relative w-16 h-16 group-hover:scale-105 transition-transform">
+              <img
+                src="/images/IAMD_LOGO.jpg"
+                alt="IAMD Logo"
+                className="w-full h-full object-contain"
+              />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-gray-900">IAMD</h1>
+              <h1 className="text-xl font-bold text-blue-600">IAMD</h1>
               <p className="text-xs text-gray-500">Since 1992</p>
             </div>
           </Link>

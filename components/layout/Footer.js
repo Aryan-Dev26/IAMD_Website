@@ -11,9 +11,13 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           {/* About Section */}
           <div>
-            <div className="flex items-center space-x-2 mb-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-pink-500 rounded-lg flex items-center justify-center">
-                <Heart className="w-5 h-5 text-white" fill="white" />
+            <div className="flex items-center space-x-3 mb-4">
+              <div className="relative w-14 h-14">
+                <img
+                  src="/images/IAMD_LOGO.jpg"
+                  alt="IAMD Logo"
+                  className="w-full h-full object-contain"
+                />
               </div>
               <div>
                 <h3 className="text-lg font-bold">IAMD</h3>
