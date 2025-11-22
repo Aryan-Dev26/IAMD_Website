@@ -225,9 +225,11 @@ const Hero = () => {
               />
 
               <SmallImageCard
-                src={placeholderImages.facility.exterior}
+                src="/images/Map.png"
                 alt="IAMD Facility in Solan, HP"
                 label="Solan, HP"
+                isClickable={true}
+                mapLink="https://www.google.com/maps/search/?api=1&query=Solan+Himachal+Pradesh+India"
               />
             </div>
 
@@ -258,7 +260,7 @@ const Hero = () => {
 };
 
 // Small Image Card Component with Tilt Effect
-const SmallImageCard = ({ src, alt, label }) => {
+const SmallImageCard = ({ src, alt, label, isClickable = false, mapLink }) => {
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const cardRef = useRef(null);
 
@@ -282,10 +284,18 @@ const SmallImageCard = ({ src, alt, label }) => {
     setTilt({ x: 0, y: 0 });
   };
 
+  const handleClick = (e) => {
+    if (isClickable && mapLink) {
+      e.preventDefault();
+      window.open(mapLink, '_blank', 'noopener,noreferrer');
+    }
+  };
+
   return (
     <div 
-      className="relative group overflow-hidden rounded-xl"
+      className={`relative group overflow-hidden rounded-xl ${isClickable ? 'cursor-pointer hover:ring-2 hover:ring-blue-400' : ''}`}
       style={{ perspective: '1000px' }}
+      onClick={handleClick}
     >
       <div
         ref={cardRef}
@@ -306,7 +316,17 @@ const SmallImageCard = ({ src, alt, label }) => {
         />
       </div>
       <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-        <p className="text-white text-xs font-semibold px-4 text-center">{label}</p>
+        <div className="text-center">
+          <p className="text-white text-sm md:text-base font-bold px-4">{label}</p>
+          {isClickable && (
+            <p className="text-white/90 text-xs mt-2 flex items-center justify-center gap-1">
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+              </svg>
+              Click to view map
+            </p>
+          )}
+        </div>
       </div>
     </div>
   );
