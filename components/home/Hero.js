@@ -1,15 +1,79 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
-import { ArrowRight, Heart, Users, Award, MapPin } from 'lucide-react';
+import { ArrowRight, Heart, ChevronLeft, ChevronRight } from 'lucide-react';
 import { placeholderImages } from '@/lib/utils/imageHelpers';
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const imageRef = useRef(null);
+
+  // Carousel images
+  const carouselImages = [
+    {
+      src: placeholderImages.hero.therapy,
+      title: 'Comprehensive Care',
+      subtitle: 'Personalized therapy programs',
+    },
+    {
+      src: placeholderImages.services.physiotherapy,
+      title: 'Physiotherapy',
+      subtitle: 'Advanced rehabilitation techniques',
+    },
+    {
+      src: placeholderImages.services.counselling,
+      title: 'Counselling Services',
+      subtitle: 'Mental health support',
+    },
+    {
+      src: placeholderImages.facility.therapy_room,
+      title: 'Modern Facilities',
+      subtitle: 'State-of-the-art equipment',
+    },
+  ];
 
   useEffect(() => {
     setIsVisible(true);
   }, []);
+
+  // Auto-advance carousel
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % carouselImages.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [carouselImages.length]);
+
+  // Handle mouse move for 3D tilt effect
+  const handleMouseMove = (e) => {
+    if (!imageRef.current) return;
+    
+    const rect = imageRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    
+    const tiltX = ((y - centerY) / centerY) * -10; // Inverted for natural feel
+    const tiltY = ((x - centerX) / centerX) * 10;
+    
+    setTilt({ x: tiltX, y: tiltY });
+  };
+
+  const handleMouseLeave = () => {
+    setTilt({ x: 0, y: 0 });
+  };
+
+  const nextImage = () => {
+    setCurrentImageIndex((prev) => (prev + 1) % carouselImages.length);
+  };
+
+  const prevImage = () => {
+    setCurrentImageIndex((prev) => (prev - 1 + carouselImages.length) % carouselImages.length);
+  };
 
   return (
     <div className="relative min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 overflow-hidden pt-20">
@@ -72,56 +136,99 @@ const Hero = () => {
           {/* Right Content - Image Grid */}
           <div className={`relative transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
             <div className="grid grid-cols-2 gap-3">
-              {/* Main Image */}
-              <div className="col-span-2 relative group overflow-hidden rounded-xl">
-                <div className="aspect-video relative">
-                  <Image
-                    src={placeholderImages.hero.therapy}
-                    alt="Rehabilitation Therapy Session at IAMD"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    priority
-                  />
+              {/* Main Image with Carousel and 3D Tilt */}
+              <div 
+                className="col-span-2 relative group rounded-xl overflow-hidden"
+                style={{ perspective: '1000px' }}
+                onMouseMove={handleMouseMove}
+                onMouseLeave={handleMouseLeave}
+              >
+                {/* Image Container with Tilt - ONLY THIS TILTS */}
+                <div 
+                  ref={imageRef}
+                  className="aspect-video relative transition-transform duration-300 ease-out"
+                  style={{
+                    transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
+                    transformStyle: 'preserve-3d',
+                  }}
+                >
+                  {/* Carousel Images */}
+                  {carouselImages.map((image, index) => (
+                    <div
+                      key={index}
+                      className={`absolute inset-0 transition-opacity duration-700 ${
+                        index === currentImageIndex ? 'opacity-100' : 'opacity-0'
+                      }`}
+                    >
+                      <Image
+                        src={image.src}
+                        alt={image.title}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        priority={index === 0}
+                      />
+                    </div>
+                  ))}
                 </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                
+                {/* Overlay with info - STAYS STABLE */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4 pointer-events-none">
                   <div className="text-white">
-                    <h3 className="font-bold text-base mb-1">Comprehensive Care</h3>
-                    <p className="text-xs text-gray-300">Personalized therapy programs</p>
+                    <h3 className="font-bold text-base mb-1">
+                      {carouselImages[currentImageIndex].title}
+                    </h3>
+                    <p className="text-xs text-gray-300">
+                      {carouselImages[currentImageIndex].subtitle}
+                    </p>
                   </div>
                 </div>
+
+                {/* Navigation Arrows - STAYS STABLE */}
+                <button
+                  onClick={prevImage}
+                  className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:bg-white/30 hover:scale-110 z-10"
+                  aria-label="Previous image"
+                >
+                  <ChevronLeft className="w-5 h-5 text-white" />
+                </button>
+                <button
+                  onClick={nextImage}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:bg-white/30 hover:scale-110 z-10"
+                  aria-label="Next image"
+                >
+                  <ChevronRight className="w-5 h-5 text-white" />
+                </button>
+
+                {/* Carousel Indicators - STAYS STABLE */}
+                <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+                  {carouselImages.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentImageIndex(index)}
+                      className={`h-1.5 rounded-full transition-all ${
+                        index === currentImageIndex
+                          ? 'bg-white w-6'
+                          : 'bg-white/50 w-1.5 hover:bg-white/75'
+                      }`}
+                      aria-label={`Go to image ${index + 1}`}
+                    />
+                  ))}
+                </div>
               </div>
 
-              {/* Small Images */}
-              <div className="relative group overflow-hidden rounded-xl">
-                <div className="aspect-square relative">
-                  <Image
-                    src={placeholderImages.team.therapist}
-                    alt="Expert Medical Team"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 50vw, 25vw"
-                  />
-                </div>
-                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                  <p className="text-white text-xs font-semibold px-4 text-center">Expert Team</p>
-                </div>
-              </div>
+              {/* Small Images with Hover Tilt */}
+              <SmallImageCard
+                src={placeholderImages.team.therapist}
+                alt="Expert Medical Team"
+                label="Expert Team"
+              />
 
-              <div className="relative group overflow-hidden rounded-xl">
-                <div className="aspect-square relative">
-                  <Image
-                    src={placeholderImages.facility.exterior}
-                    alt="IAMD Facility in Solan, HP"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 50vw, 25vw"
-                  />
-                </div>
-                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                  <p className="text-white text-xs font-semibold px-4 text-center">Solan, HP</p>
-                </div>
-              </div>
+              <SmallImageCard
+                src={placeholderImages.facility.exterior}
+                alt="IAMD Facility in Solan, HP"
+                label="Solan, HP"
+              />
             </div>
 
             {/* Floating Badge */}
@@ -145,6 +252,61 @@ const Hero = () => {
         <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
           <div className="w-1 h-3 bg-white/50 rounded-full mt-2"></div>
         </div>
+      </div>
+    </div>
+  );
+};
+
+// Small Image Card Component with Tilt Effect
+const SmallImageCard = ({ src, alt, label }) => {
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const cardRef = useRef(null);
+
+  const handleMouseMove = (e) => {
+    if (!cardRef.current) return;
+    
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    
+    const tiltX = ((y - centerY) / centerY) * -8;
+    const tiltY = ((x - centerX) / centerX) * 8;
+    
+    setTilt({ x: tiltX, y: tiltY });
+  };
+
+  const handleMouseLeave = () => {
+    setTilt({ x: 0, y: 0 });
+  };
+
+  return (
+    <div 
+      className="relative group overflow-hidden rounded-xl"
+      style={{ perspective: '1000px' }}
+    >
+      <div
+        ref={cardRef}
+        className="aspect-square relative transition-transform duration-300 ease-out"
+        style={{
+          transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) scale(1.05)`,
+          transformStyle: 'preserve-3d',
+        }}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+      >
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          className="object-cover"
+          sizes="(max-width: 768px) 50vw, 25vw"
+        />
+      </div>
+      <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+        <p className="text-white text-xs font-semibold px-4 text-center">{label}</p>
       </div>
     </div>
   );
