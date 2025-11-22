@@ -1,5 +1,6 @@
 import Hero from '@/components/home/Hero';
 import AboutPreview from '@/components/home/AboutPreview';
+import OurTeam from '@/components/home/OurTeam';
 import WhatIsMD from '@/components/home/WhatIsMD';
 import ServicesGrid from '@/components/home/ServicesGrid';
 import FacilityShowcase from '@/components/home/FacilityShowcase';
@@ -22,6 +23,12 @@ export default function Home() {
       <ScrollReveal animation="fadeInUp">
         <section id="about">
           <AboutPreview />
+        </section>
+      </ScrollReveal>
+      
+      <ScrollReveal animation="fadeInUp" delay={100}>
+        <section id="team">
+          <OurTeam />
         </section>
       </ScrollReveal>
       

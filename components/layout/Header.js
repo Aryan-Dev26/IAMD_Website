@@ -34,7 +34,14 @@ const Header = () => {
       return;
     }
     
-    // Otherwise, handle as anchor link
+    // If it's an anchor link but we're not on homepage, go to homepage first
+    if (href.startsWith('#') && window.location.pathname !== '/') {
+      setIsMobileMenuOpen(false);
+      window.location.href = '/' + href;
+      return;
+    }
+    
+    // Otherwise, handle as anchor link on current page
     e.preventDefault();
     const element = document.querySelector(href);
     if (element) {

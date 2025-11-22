@@ -269,32 +269,41 @@ export default function BookingModal({ isOpen, onClose }) {
               </div>
             </div>
 
-            {/* Submit Button */}
-            <div className="flex items-center justify-between pt-4">
-              <p className="text-sm text-gray-500">* Required fields</p>
+            {/* Action Buttons */}
+            <div className="flex items-center justify-between pt-4 gap-4">
               <button
-                type="submit"
-                disabled={isSubmitting || submitStatus === 'success'}
-                className={`px-8 py-3 rounded-full font-semibold transition-all transform hover:scale-105 ${
-                  submitStatus === 'success'
-                    ? 'bg-green-500 text-white'
-                    : 'bg-gradient-to-r from-orange-500 to-pink-500 text-white hover:shadow-lg hover:shadow-orange-500/50'
-                } disabled:opacity-50 disabled:cursor-not-allowed`}
+                type="button"
+                onClick={onClose}
+                className="px-6 py-3 rounded-full font-semibold border-2 border-gray-300 text-gray-700 hover:bg-gray-50 transition-all"
               >
-                {isSubmitting ? (
-                  <span className="flex items-center space-x-2">
-                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                    <span>Submitting...</span>
-                  </span>
-                ) : submitStatus === 'success' ? (
-                  <span className="flex items-center space-x-2">
-                    <span>✓</span>
-                    <span>Submitted!</span>
-                  </span>
-                ) : (
-                  'Submit Registration'
-                )}
+                Cancel
               </button>
+              <div className="flex items-center gap-3">
+                <p className="text-sm text-gray-500">* Required fields</p>
+                <button
+                  type="submit"
+                  disabled={isSubmitting || submitStatus === 'success'}
+                  className={`px-8 py-3 rounded-full font-semibold transition-all transform hover:scale-105 ${
+                    submitStatus === 'success'
+                      ? 'bg-green-500 text-white'
+                      : 'bg-gradient-to-r from-orange-500 to-pink-500 text-white hover:shadow-lg hover:shadow-orange-500/50'
+                  } disabled:opacity-50 disabled:cursor-not-allowed`}
+                >
+                  {isSubmitting ? (
+                    <span className="flex items-center space-x-2">
+                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                      <span>Submitting...</span>
+                    </span>
+                  ) : submitStatus === 'success' ? (
+                    <span className="flex items-center space-x-2">
+                      <span>✓</span>
+                      <span>Submitted!</span>
+                    </span>
+                  ) : (
+                    'Submit Registration'
+                  )}
+                </button>
+              </div>
             </div>
           </form>
 

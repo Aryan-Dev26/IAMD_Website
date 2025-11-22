@@ -3,12 +3,14 @@ import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { ArrowRight, Heart, ChevronLeft, ChevronRight } from 'lucide-react';
 import { placeholderImages } from '@/lib/utils/imageHelpers';
+import BookingModal from '@/components/shared/BookingModal';
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const imageRef = useRef(null);
+  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
 
   // Carousel images - Using Unsplash placeholders
   const carouselImages = [
@@ -107,11 +109,28 @@ const Hero = () => {
             </p>
 
             <div className="flex flex-wrap gap-4 pt-4">
-              <button className="group bg-gradient-to-r from-orange-500 to-pink-500 text-white px-6 py-3 rounded-full font-semibold hover:shadow-2xl hover:shadow-orange-500/50 transition-all transform hover:scale-105 flex items-center space-x-2">
+              <button 
+                onClick={() => setIsBookingModalOpen(true)}
+                className="group bg-gradient-to-r from-orange-500 to-pink-500 text-white px-6 py-3 rounded-full font-semibold hover:shadow-2xl hover:shadow-orange-500/50 transition-all transform hover:scale-105 flex items-center space-x-2"
+              >
                 <span>Start Your Journey</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </button>
-              <button className="bg-white/10 backdrop-blur-sm text-white px-6 py-3 rounded-full font-semibold border border-white/20 hover:bg-white/20 transition-all">
+              <button 
+                onClick={() => {
+                  const element = document.querySelector('#about');
+                  if (element) {
+                    const offset = 80;
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - offset;
+                    window.scrollTo({
+                      top: offsetPosition,
+                      behavior: 'smooth'
+                    });
+                  }
+                }}
+                className="bg-white/10 backdrop-blur-sm text-white px-6 py-3 rounded-full font-semibold border border-white/20 hover:bg-white/20 transition-all"
+              >
                 Learn More
               </button>
             </div>
@@ -255,6 +274,12 @@ const Hero = () => {
           <div className="w-1 h-3 bg-white/50 rounded-full mt-2"></div>
         </div>
       </div>
+
+      {/* Booking Modal */}
+      <BookingModal 
+        isOpen={isBookingModalOpen} 
+        onClose={() => setIsBookingModalOpen(false)} 
+      />
     </div>
   );
 };
