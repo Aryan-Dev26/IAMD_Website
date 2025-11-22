@@ -21,13 +21,20 @@ const Header = () => {
     { name: 'Home', href: '#home' },
     { name: 'About', href: '#about' },
     { name: 'Services', href: '#services' },
+    { name: 'Team', href: '/team' },
     { name: 'Gallery', href: '#gallery' },
-    { name: 'Warriors', href: '#warriors' },
     { name: 'Blog', href: '/blog' },
     { name: 'Contact', href: '#contact' },
   ];
 
   const handleNavClick = (e, href) => {
+    // If it's a page link (starts with /), let it navigate normally
+    if (href.startsWith('/')) {
+      setIsMobileMenuOpen(false);
+      return;
+    }
+    
+    // Otherwise, handle as anchor link
     e.preventDefault();
     const element = document.querySelector(href);
     if (element) {

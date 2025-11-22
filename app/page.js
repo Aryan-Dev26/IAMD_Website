@@ -6,7 +6,6 @@ import FacilityShowcase from '@/components/home/FacilityShowcase';
 import PicnicGallery from '@/components/home/PicnicGallery';
 import SuccessStories from '@/components/home/SuccessStories';
 import Testimonials from '@/components/home/Testimonials';
-import OurTeam from '@/components/home/OurTeam';
 import Awards from '@/components/home/Awards';
 import LatestNews from '@/components/home/LatestNews';
 import HowToHelp from '@/components/home/HowToHelp';
@@ -59,12 +58,6 @@ export default function Home() {
       <ScrollReveal animation="fadeInUp" delay={100}>
         <section id="warriors">
           <Testimonials />
-        </section>
-      </ScrollReveal>
-      
-      <ScrollReveal animation="fadeInUp" delay={100}>
-        <section id="team">
-          <OurTeam />
         </section>
       </ScrollReveal>
       

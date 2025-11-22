@@ -6,21 +6,57 @@ export default function OurTeam() {
   const team = [
     {
       id: 1,
-      name: 'Piyush Bhai Desai',
-      role: 'Founder & Director',
-      image: '/images/team/piyush-bhai-desai-300x209.jpg.jpeg',
-      bio: 'Visionary leader dedicated to transforming lives of MD warriors',
+      name: 'Mrs. Urmila Baldt',
+      role: 'Chief Patron',
+      image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&h=800&fit=crop',
+      bio: 'Guiding force behind IAMD\'s mission to empower MD warriors',
       linkedin: '#',
-      email: 'piyush@iamd.in',
+      email: 'patron@iamd.in',
     },
     {
       id: 2,
-      name: 'Ravi Shankar',
-      role: 'Medical Director',
-      image: '/images/team/ravishankar.jpg.jpeg',
-      bio: 'Expert in neuromuscular disorders with 20+ years experience',
+      name: 'Ms. Sanjana Goyal',
+      role: 'President',
+      image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&h=800&fit=crop',
+      bio: 'Leading IAMD with dedication and compassion for over a decade',
       linkedin: '#',
-      email: 'ravi@iamd.in',
+      email: 'president@iamd.in',
+    },
+    {
+      id: 3,
+      name: 'Mr. R.S. Chandel',
+      role: 'Vice President',
+      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&h=800&fit=crop',
+      bio: 'Strategic leader committed to expanding IAMD\'s reach and impact',
+      linkedin: '#',
+      email: 'vp@iamd.in',
+    },
+    {
+      id: 4,
+      name: 'Mr. Vipul',
+      role: 'Secretary',
+      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=800&fit=crop',
+      bio: 'Ensuring smooth operations and coordination across all programs',
+      linkedin: '#',
+      email: 'secretary@iamd.in',
+    },
+    {
+      id: 5,
+      name: 'Mr. Ravinder Kumar',
+      role: 'Treasurer',
+      image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&h=800&fit=crop',
+      bio: 'Managing finances with transparency and accountability',
+      linkedin: '#',
+      email: 'treasurer@iamd.in',
+    },
+    {
+      id: 6,
+      name: 'Mrs. Urmil Thakur',
+      role: 'PRO (Public Relations Officer)',
+      image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=600&h=800&fit=crop',
+      bio: 'Building bridges between IAMD and the community',
+      linkedin: '#',
+      email: 'pro@iamd.in',
     },
   ];
 
@@ -43,7 +79,7 @@ export default function OurTeam() {
         </div>
 
         {/* Team Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {team.map((member, index) => (
             <div
               key={member.id}
