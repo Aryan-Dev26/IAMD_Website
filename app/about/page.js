@@ -1,6 +1,7 @@
 'use client';
 import Image from 'next/image';
-import { Heart, Users, Award, Target, Building2, Sparkles, TrendingUp, Shield } from 'lucide-react';
+import Link from 'next/link';
+import { Heart, Users, Award, Target, Building2, Sparkles, TrendingUp, Shield, Home } from 'lucide-react';
 import { placeholderImages } from '@/lib/utils/imageHelpers';
 import { stats, achievements } from '@/lib/data/stats';
 
@@ -34,6 +35,17 @@ export default function AboutPage() {
 
   return (
     <main className="min-h-screen">
+      {/* Go to Home Button */}
+      <div className="fixed top-24 right-6 z-50">
+        <Link
+          href="/"
+          className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-full shadow-lg hover:bg-blue-700 hover:shadow-xl transition-all transform hover:scale-105"
+        >
+          <Home className="w-4 h-4" />
+          <span className="font-medium">Home</span>
+        </Link>
+      </div>
+
       {/* Hero Section */}
       <section className="relative h-[60vh] flex items-center justify-center bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 overflow-hidden">
         <div className="absolute inset-0 opacity-10">

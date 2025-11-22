@@ -27,25 +27,48 @@ export default function BookingModal({ isOpen, onClose }) {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission (you can replace this with actual API call)
-    setTimeout(() => {
+    try {
+      // Send booking to API
+      const response = await fetch('/api/bookings', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setIsSubmitting(false);
+        setSubmitStatus('success');
+        
+        // Reset form after 2 seconds
+        setTimeout(() => {
+          setFormData({
+            name: '',
+            email: '',
+            phone: '',
+            preferredDate: '',
+            service: '',
+            message: '',
+          });
+          setSubmitStatus(null);
+          onClose();
+        }, 2000);
+      } else {
+        throw new Error('Failed to submit booking');
+      }
+    } catch (error) {
+      console.error('Booking error:', error);
       setIsSubmitting(false);
-      setSubmitStatus('success');
+      setSubmitStatus('error');
       
-      // Reset form after 2 seconds
+      // Clear error after 3 seconds
       setTimeout(() => {
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          preferredDate: '',
-          service: '',
-          message: '',
-        });
         setSubmitStatus(null);
-        onClose();
-      }, 2000);
-    }, 1500);
+      }, 3000);
+    }
   };
 
   const iamdPhone = '+91-1792-230860'; // Replace with actual IAMD phone

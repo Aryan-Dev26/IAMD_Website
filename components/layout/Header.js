@@ -8,6 +8,8 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+  const [logoClicks, setLogoClicks] = useState(0);
+  const [clickTimer, setClickTimer] = useState(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,6 +18,44 @@ const Header = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Secret admin access: Press Ctrl+Shift+A
+  useEffect(() => {
+    const handleKeyPress = (e) => {
+      if (e.ctrlKey && e.shiftKey && e.key === 'A') {
+        e.preventDefault();
+        window.location.href = '/admin';
+      }
+    };
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, []);
+
+  // Secret admin access: Click logo 5 times within 2 seconds
+  const handleLogoClick = (e) => {
+    e.preventDefault();
+    
+    const newClicks = logoClicks + 1;
+    setLogoClicks(newClicks);
+
+    // Clear existing timer
+    if (clickTimer) {
+      clearTimeout(clickTimer);
+    }
+
+    // Check if 5 clicks reached
+    if (newClicks >= 5) {
+      window.location.href = '/admin';
+      setLogoClicks(0);
+      return;
+    }
+
+    // Reset clicks after 2 seconds
+    const timer = setTimeout(() => {
+      setLogoClicks(0);
+    }, 2000);
+    setClickTimer(timer);
+  };
 
   const navLinks = [
     { name: 'Home', href: '#home' },
@@ -67,8 +107,11 @@ const Header = () => {
     >
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
-          {/* Logo */}
-          <Link href="/" className="flex items-center space-x-3 group">
+          {/* Logo - Secret admin access: click 5 times */}
+          <div 
+            onClick={handleLogoClick}
+            className="flex items-center space-x-3 group cursor-pointer"
+          >
             <div className="relative w-16 h-16 group-hover:scale-105 transition-transform">
               <img
                 src="/images/IAMD_LOGO.jpg"
@@ -80,7 +123,7 @@ const Header = () => {
               <h1 className="text-xl font-bold text-blue-600">IAMD</h1>
               <p className="text-xs text-gray-500">Since 1992</p>
             </div>
-          </Link>
+          </div>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-8">
@@ -100,12 +143,15 @@ const Header = () => {
           <div className="hidden lg:flex items-center space-x-3">
             <button
               onClick={() => setIsBookingModalOpen(true)}
+              data-booking-trigger
               className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 py-2.5 rounded-full font-semibold hover:shadow-lg hover:shadow-blue-500/50 transition-all transform hover:scale-105 cursor-pointer"
             >
               Book Visit
             </button>
             <a
-              href="#donate"
+              href="https://pages.razorpay.com/pl_Khn50cJnC1of3R/view"
+              target="_blank"
+              rel="noopener noreferrer"
               className="bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 px-6 py-2.5 rounded-full font-bold hover:shadow-lg hover:shadow-yellow-500/50 transition-all transform hover:scale-105 cursor-pointer"
             >
               Donate
@@ -127,14 +173,14 @@ const Header = () => {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden py-4 border-t border-gray-200">
-            <div className="flex flex-col space-y-4">
+          <div className="lg:hidden py-4 border-t border-gray-200 animate-slideDown">
+            <div className="flex flex-col space-y-2">
               {navLinks.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
-                  className="text-base font-medium text-gray-700 hover:text-orange-500 transition-colors py-2 cursor-pointer"
+                  className="text-base font-medium text-gray-700 hover:text-orange-500 hover:bg-orange-50 transition-colors py-3 px-4 rounded-lg cursor-pointer active:bg-orange-100"
                 >
                   {link.name}
                 </a>
@@ -144,10 +190,19 @@ const Header = () => {
                   setIsMobileMenuOpen(false);
                   setIsBookingModalOpen(true);
                 }}
-                className="bg-gradient-to-r from-orange-500 to-pink-500 text-white px-6 py-3 rounded-full font-semibold text-center hover:shadow-lg transition-all cursor-pointer"
+                data-booking-trigger
+                className="bg-gradient-to-r from-orange-500 to-pink-500 text-white px-6 py-4 rounded-xl font-semibold text-center hover:shadow-lg transition-all cursor-pointer mt-4 active:scale-95"
               >
                 Book Visit
               </button>
+              <a
+                href="https://pages.razorpay.com/pl_Khn50cJnC1of3R/view"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 px-6 py-4 rounded-xl font-bold text-center hover:shadow-lg transition-all cursor-pointer active:scale-95"
+              >
+                Donate Now
+              </a>
             </div>
           </div>
         )}

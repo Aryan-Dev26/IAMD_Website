@@ -184,3 +184,94 @@ body {
   background-size: 200% 200%;
   animation: gradient 3s ease infinite;
 }
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+  /* Larger touch targets for mobile */
+  button, a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Better spacing for mobile */
+  .mobile-spacing {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* Prevent text from being too small */
+  body {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Better modal sizing on mobile */
+  .modal-mobile {
+    max-height: 90vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Improve form inputs on mobile */
+  input, textarea, select {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+
+  /* Better card spacing */
+  .card-mobile {
+    margin-bottom: 1rem;
+  }
+
+  /* Sticky header adjustment */
+  .sticky-mobile {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+}
+
+/* Touch-friendly interactions */
+@media (hover: none) and (pointer: coarse) {
+  /* Remove hover effects on touch devices */
+  .hover-only:hover {
+    transform: none;
+  }
+
+  /* Larger tap targets */
+  button, a, input[type="button"], input[type="submit"] {
+    padding: 0.75rem 1.5rem;
+  }
+}
+
+/* Smooth scrolling for mobile */
+@supports (-webkit-overflow-scrolling: touch) {
+  * {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Prevent horizontal scroll */
+body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* Better focus states for accessibility */
+*:focus-visible {
+  outline: 2px solid #3B82F6;
+  outline-offset: 2px;
+}
+
+/* Improve button tap feedback */
+button:active, a:active {
+  transform: scale(0.98);
+  transition: transform 0.1s;
+}
+
+/* Safe area for notched devices */
+@supports (padding: max(0px)) {
+  body {
+    padding-left: max(0px, env(safe-area-inset-left));
+    padding-right: max(0px, env(safe-area-inset-right));
+  }
+}

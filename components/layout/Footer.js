@@ -1,9 +1,12 @@
 'use client';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Heart, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const pathname = usePathname();
+  const isHomePage = pathname === '/';
 
   return (
     <footer className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white">
@@ -35,28 +38,28 @@ const Footer = () => {
             <h4 className="text-lg font-bold mb-4">Quick Links</h4>
             <ul className="space-y-2">
               <li>
-                <a href="#about" className="text-sm text-gray-300 hover:text-orange-400 transition-colors cursor-pointer">
+                <Link href={isHomePage ? "#about" : "/#about"} className="text-sm text-gray-300 hover:text-orange-400 transition-colors cursor-pointer">
                   About Us
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#services" className="text-sm text-gray-300 hover:text-orange-400 transition-colors cursor-pointer">
+                <Link href={isHomePage ? "#services" : "/#services"} className="text-sm text-gray-300 hover:text-orange-400 transition-colors cursor-pointer">
                   Our Services
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#facility" className="text-sm text-gray-300 hover:text-orange-400 transition-colors cursor-pointer">
+                <Link href={isHomePage ? "#facility" : "/#facility"} className="text-sm text-gray-300 hover:text-orange-400 transition-colors cursor-pointer">
                   Facility
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#warriors" className="text-sm text-gray-300 hover:text-orange-400 transition-colors cursor-pointer">
-                  Warriors
-                </a>
+                <Link href={isHomePage ? "#gallery" : "/#gallery"} className="text-sm text-gray-300 hover:text-orange-400 transition-colors cursor-pointer">
+                  Gallery
+                </Link>
               </li>
               <li>
-                <Link href="/blog" className="text-sm text-gray-300 hover:text-orange-400 transition-colors">
-                  Blog
+                <Link href="/team" className="text-sm text-gray-300 hover:text-orange-400 transition-colors">
+                  Our Team
                 </Link>
               </li>
             </ul>
@@ -72,24 +75,24 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <a href="#contact" className="text-sm text-gray-300 hover:text-orange-400 transition-colors cursor-pointer">
+                <Link href={isHomePage ? "#contact" : "/#contact"} className="text-sm text-gray-300 hover:text-orange-400 transition-colors cursor-pointer">
                   Contact Us
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-sm text-gray-300 hover:text-orange-400 transition-colors cursor-pointer">
+                <Link href="/about" className="text-sm text-gray-300 hover:text-orange-400 transition-colors">
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link href="/for-parents" className="text-sm text-gray-300 hover:text-orange-400 transition-colors">
                   FAQs
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-sm text-gray-300 hover:text-orange-400 transition-colors cursor-pointer">
+                <Link href="/" className="text-sm text-gray-300 hover:text-orange-400 transition-colors">
                   Privacy Policy
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-sm text-gray-300 hover:text-orange-400 transition-colors cursor-pointer">
-                  Terms of Service
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -154,9 +157,19 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-white/10 pt-8 mt-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <p className="text-sm text-gray-400 text-center md:text-left">
-              © {currentYear} Indian Association of Muscular Dystrophy. All rights reserved.
-            </p>
+            <div className="flex items-center space-x-4">
+              <p className="text-sm text-gray-400 text-center md:text-left">
+                © {currentYear} Indian Association of Muscular Dystrophy. All rights reserved.
+              </p>
+              {/* Hidden Admin Link - Desktop Only */}
+              <Link
+                href="/admin"
+                className="hidden md:inline text-xs text-gray-600 hover:text-blue-400 transition-colors opacity-30 hover:opacity-100"
+                title="Admin Login"
+              >
+                •
+              </Link>
+            </div>
             <p className="text-sm text-gray-400 flex items-center space-x-1">
               <span>Made with</span>
               <Heart className="w-4 h-4 text-red-500" fill="currentColor" />

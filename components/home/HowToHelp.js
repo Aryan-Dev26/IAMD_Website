@@ -1,7 +1,26 @@
 'use client';
+import { useState } from 'react';
 import { Heart, HandHeart, Gift, Users } from 'lucide-react';
+import VolunteerModal from '@/components/shared/VolunteerModal';
+import SponsorModal from '@/components/shared/SponsorModal';
 
 export default function HowToHelp() {
+  const [isVolunteerModalOpen, setIsVolunteerModalOpen] = useState(false);
+  const [isSponsorModalOpen, setIsSponsorModalOpen] = useState(false);
+
+  const handleShare = () => {
+    if (navigator.share) {
+      navigator.share({
+        title: 'IAMD - Indian Association of Muscular Dystrophy',
+        text: 'Help support MD warriors! Join IAMD in making a difference.',
+        url: window.location.origin,
+      }).catch((error) => console.log('Error sharing:', error));
+    } else {
+      // Fallback: Copy to clipboard
+      navigator.clipboard.writeText(window.location.origin);
+      alert('Link copied to clipboard!');
+    }
+  };
   const ways = [
     {
       icon: Heart,
@@ -12,7 +31,7 @@ export default function HowToHelp() {
       borderColor: 'border-red-200',
       hoverColor: 'hover:border-red-400',
       action: 'Donate Now',
-      href: '#donate',
+      href: 'https://pages.razorpay.com/pl_Khn50cJnC1of3R/view',
     },
     {
       icon: HandHeart,
@@ -23,7 +42,7 @@ export default function HowToHelp() {
       borderColor: 'border-blue-200',
       hoverColor: 'hover:border-blue-400',
       action: 'Join Us',
-      href: '#volunteer',
+      onClick: () => setIsVolunteerModalOpen(true),
     },
     {
       icon: Gift,
@@ -34,7 +53,7 @@ export default function HowToHelp() {
       borderColor: 'border-purple-200',
       hoverColor: 'hover:border-purple-400',
       action: 'Sponsor',
-      href: '#sponsor',
+      onClick: () => setIsSponsorModalOpen(true),
     },
     {
       icon: Users,
@@ -45,11 +64,12 @@ export default function HowToHelp() {
       borderColor: 'border-green-200',
       hoverColor: 'hover:border-green-400',
       action: 'Share',
-      href: '#share',
+      onClick: handleShare,
     },
   ];
 
   return (
+    <>
     <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
       <div className="max-w-7xl mx-auto px-4">
         {/* Section Header */}
@@ -91,15 +111,29 @@ export default function HowToHelp() {
                   {way.description}
                 </p>
 
-                <a
-                  href={way.href}
-                  className={`inline-flex items-center space-x-2 font-semibold bg-gradient-to-r ${way.color} bg-clip-text text-transparent group-hover:underline`}
-                >
-                  <span>{way.action}</span>
-                  <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                  </svg>
-                </a>
+                {way.href ? (
+                  <a
+                    href={way.href}
+                    target={way.href.startsWith('http') ? '_blank' : '_self'}
+                    rel={way.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                    className={`inline-flex items-center space-x-2 font-semibold bg-gradient-to-r ${way.color} bg-clip-text text-transparent group-hover:underline cursor-pointer`}
+                  >
+                    <span>{way.action}</span>
+                    <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                    </svg>
+                  </a>
+                ) : (
+                  <button
+                    onClick={way.onClick}
+                    className={`inline-flex items-center space-x-2 font-semibold bg-gradient-to-r ${way.color} bg-clip-text text-transparent group-hover:underline cursor-pointer`}
+                  >
+                    <span>{way.action}</span>
+                    <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                    </svg>
+                  </button>
+                )}
               </div>
             );
           })}
@@ -139,5 +173,10 @@ export default function HowToHelp() {
         </div>
       </div>
     </section>
+
+      {/* Modals */}
+      <VolunteerModal isOpen={isVolunteerModalOpen} onClose={() => setIsVolunteerModalOpen(false)} />
+      <SponsorModal isOpen={isSponsorModalOpen} onClose={() => setIsSponsorModalOpen(false)} />
+    </>
   );
 }
