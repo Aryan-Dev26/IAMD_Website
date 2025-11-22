@@ -2,10 +2,12 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Heart, Menu, X } from 'lucide-react';
+import BookingModal from '@/components/shared/BookingModal';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -77,13 +79,12 @@ const Header = () => {
 
           {/* CTA Button */}
           <div className="hidden lg:block">
-            <a
-              href="#contact"
-              onClick={(e) => handleNavClick(e, '#contact')}
+            <button
+              onClick={() => setIsBookingModalOpen(true)}
               className="bg-gradient-to-r from-orange-500 to-pink-500 text-white px-6 py-2.5 rounded-full font-semibold hover:shadow-lg hover:shadow-orange-500/50 transition-all transform hover:scale-105 cursor-pointer"
             >
               Book Visit
-            </a>
+            </button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -113,17 +114,25 @@ const Header = () => {
                   {link.name}
                 </a>
               ))}
-              <a
-                href="#contact"
-                onClick={(e) => handleNavClick(e, '#contact')}
+              <button
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  setIsBookingModalOpen(true);
+                }}
                 className="bg-gradient-to-r from-orange-500 to-pink-500 text-white px-6 py-3 rounded-full font-semibold text-center hover:shadow-lg transition-all cursor-pointer"
               >
                 Book Visit
-              </a>
+              </button>
             </div>
           </div>
         )}
       </nav>
+
+      {/* Booking Modal */}
+      <BookingModal 
+        isOpen={isBookingModalOpen} 
+        onClose={() => setIsBookingModalOpen(false)} 
+      />
     </header>
   );
 };

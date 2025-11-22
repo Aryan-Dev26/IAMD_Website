@@ -1,7 +1,10 @@
 'use client';
+import { useState } from 'react';
 import { Phone, Mail, MapPin } from 'lucide-react';
+import BookingModal from '@/components/shared/BookingModal';
 
 export default function CTASection() {
+  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
   return (
     <section className="py-20 bg-gradient-to-br from-orange-600 via-pink-600 to-purple-600 text-white">
       <div className="max-w-7xl mx-auto px-4">
@@ -35,8 +38,8 @@ export default function CTASection() {
         </div>
 
         <div className="text-center">
-          <a
-            href="tel:+91XXXXXXXXXX"
+          <button
+            onClick={() => setIsBookingModalOpen(true)}
             className="group inline-block px-10 py-4 bg-white text-orange-600 rounded-full font-bold hover:bg-gray-100 transition-all hover:scale-110 shadow-2xl hover:shadow-white/50 relative overflow-hidden"
           >
             <span className="relative z-10 flex items-center gap-2">
@@ -46,9 +49,15 @@ export default function CTASection() {
               </svg>
             </span>
             <div className="absolute inset-0 bg-gradient-to-r from-orange-400 to-pink-400 opacity-0 group-hover:opacity-20 transition-opacity" />
-          </a>
+          </button>
         </div>
       </div>
+
+      {/* Booking Modal */}
+      <BookingModal 
+        isOpen={isBookingModalOpen} 
+        onClose={() => setIsBookingModalOpen(false)} 
+      />
     </section>
   );
 }
