@@ -1,5 +1,6 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
+import TopBar from "@/components/layout/TopBar";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import PageLoader from "@/components/shared/PageLoader";
@@ -23,6 +24,7 @@ export default function RootLayout({ children }) {
       <body className={`${inter.variable} font-sans antialiased`}>
         <PageLoader />
         <ScrollProgress />
+        <TopBar />
         <Header />
         <main className="min-h-screen">
           {children}

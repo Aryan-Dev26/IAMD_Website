@@ -1,10 +1,13 @@
 import Hero from '@/components/home/Hero';
 import AboutPreview from '@/components/home/AboutPreview';
+import WhatIsMD from '@/components/home/WhatIsMD';
 import ServicesGrid from '@/components/home/ServicesGrid';
 import FacilityShowcase from '@/components/home/FacilityShowcase';
 import PicnicGallery from '@/components/home/PicnicGallery';
 import SuccessStories from '@/components/home/SuccessStories';
 import Testimonials from '@/components/home/Testimonials';
+import LatestNews from '@/components/home/LatestNews';
+import HowToHelp from '@/components/home/HowToHelp';
 import CTASection from '@/components/home/CTASection';
 import ScrollReveal from '@/components/shared/ScrollReveal';
 
@@ -18,6 +21,12 @@ export default function Home() {
       <ScrollReveal animation="fadeInUp">
         <section id="about">
           <AboutPreview />
+        </section>
+      </ScrollReveal>
+      
+      <ScrollReveal animation="fadeInUp" delay={100}>
+        <section id="what-is-md">
+          <WhatIsMD />
         </section>
       </ScrollReveal>
       
@@ -48,6 +57,18 @@ export default function Home() {
       <ScrollReveal animation="fadeInUp" delay={100}>
         <section id="warriors">
           <Testimonials />
+        </section>
+      </ScrollReveal>
+      
+      <ScrollReveal animation="fadeInUp" delay={100}>
+        <section id="news">
+          <LatestNews />
+        </section>
+      </ScrollReveal>
+      
+      <ScrollReveal animation="fadeInUp" delay={100}>
+        <section id="help">
+          <HowToHelp />
         </section>
       </ScrollReveal>
       

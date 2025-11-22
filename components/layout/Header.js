@@ -23,6 +23,7 @@ const Header = () => {
     { name: 'Services', href: '#services' },
     { name: 'Gallery', href: '#gallery' },
     { name: 'Warriors', href: '#warriors' },
+    { name: 'Blog', href: '/blog' },
     { name: 'Contact', href: '#contact' },
   ];
 
@@ -81,14 +82,20 @@ const Header = () => {
             ))}
           </div>
 
-          {/* CTA Button */}
-          <div className="hidden lg:block">
+          {/* CTA Buttons */}
+          <div className="hidden lg:flex items-center space-x-3">
             <button
               onClick={() => setIsBookingModalOpen(true)}
-              className="bg-gradient-to-r from-orange-500 to-pink-500 text-white px-6 py-2.5 rounded-full font-semibold hover:shadow-lg hover:shadow-orange-500/50 transition-all transform hover:scale-105 cursor-pointer"
+              className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 py-2.5 rounded-full font-semibold hover:shadow-lg hover:shadow-blue-500/50 transition-all transform hover:scale-105 cursor-pointer"
             >
               Book Visit
             </button>
+            <a
+              href="#donate"
+              className="bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 px-6 py-2.5 rounded-full font-bold hover:shadow-lg hover:shadow-yellow-500/50 transition-all transform hover:scale-105 cursor-pointer"
+            >
+              Donate
+            </a>
           </div>
 
           {/* Mobile Menu Button */}

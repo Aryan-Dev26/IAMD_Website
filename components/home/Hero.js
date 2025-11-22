@@ -10,25 +10,25 @@ const Hero = () => {
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const imageRef = useRef(null);
 
-  // Carousel images
+  // Carousel images - Using real IAMD images
   const carouselImages = [
     {
-      src: placeholderImages.hero.therapy,
+      src: '/images/hero/slide-img1-1.jpg.jpeg',
       title: 'Comprehensive Care',
       subtitle: 'Personalized therapy programs',
     },
     {
-      src: placeholderImages.services.physiotherapy,
+      src: '/images/hero/slide-img3.jpg.jpeg',
       title: 'Physiotherapy',
       subtitle: 'Advanced rehabilitation techniques',
     },
     {
-      src: placeholderImages.services.counselling,
+      src: '/images/hero/slide-img4.jpg.jpeg',
       title: 'Counselling Services',
       subtitle: 'Mental health support',
     },
     {
-      src: placeholderImages.facility.therapy_room,
+      src: '/images/hero/slide-img5.jpg.jpeg',
       title: 'Modern Facilities',
       subtitle: 'State-of-the-art equipment',
     },
