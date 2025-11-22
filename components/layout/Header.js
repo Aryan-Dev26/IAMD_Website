@@ -16,15 +16,29 @@ const Header = () => {
   }, []);
 
   const navLinks = [
-    { name: 'Home', href: '/' },
-    { name: 'About', href: '/about' },
-    { name: 'Services', href: '/services' },
-    { name: 'Facility', href: '/facility' },
-    { name: 'Warriors', href: '/warriors' },
-    { name: 'For Parents', href: '/for-parents' },
-    { name: 'Blog', href: '/blog' },
-    { name: 'Contact', href: '/contact' },
+    { name: 'Home', href: '#home' },
+    { name: 'About', href: '#about' },
+    { name: 'Services', href: '#services' },
+    { name: 'Facility', href: '#facility' },
+    { name: 'Warriors', href: '#warriors' },
+    { name: 'Contact', href: '#contact' },
   ];
+
+  const handleNavClick = (e, href) => {
+    e.preventDefault();
+    const element = document.querySelector(href);
+    if (element) {
+      const offset = 80; // Header height
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+      setIsMobileMenuOpen(false);
+    }
+  };
 
   return (
     <header
@@ -50,24 +64,26 @@ const Header = () => {
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-8">
             {navLinks.map((link) => (
-              <Link
+              <a
                 key={link.name}
                 href={link.href}
-                className="text-sm font-medium text-gray-700 hover:text-orange-500 transition-colors"
+                onClick={(e) => handleNavClick(e, link.href)}
+                className="text-sm font-medium text-gray-700 hover:text-orange-500 transition-colors cursor-pointer"
               >
                 {link.name}
-              </Link>
+              </a>
             ))}
           </div>
 
           {/* CTA Button */}
           <div className="hidden lg:block">
-            <Link
-              href="/contact"
-              className="bg-gradient-to-r from-orange-500 to-pink-500 text-white px-6 py-2.5 rounded-full font-semibold hover:shadow-lg hover:shadow-orange-500/50 transition-all transform hover:scale-105"
+            <a
+              href="#contact"
+              onClick={(e) => handleNavClick(e, '#contact')}
+              className="bg-gradient-to-r from-orange-500 to-pink-500 text-white px-6 py-2.5 rounded-full font-semibold hover:shadow-lg hover:shadow-orange-500/50 transition-all transform hover:scale-105 cursor-pointer"
             >
               Book Visit
-            </Link>
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -88,22 +104,22 @@ const Header = () => {
           <div className="lg:hidden py-4 border-t border-gray-200">
             <div className="flex flex-col space-y-4">
               {navLinks.map((link) => (
-                <Link
+                <a
                   key={link.name}
                   href={link.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-base font-medium text-gray-700 hover:text-orange-500 transition-colors py-2"
+                  onClick={(e) => handleNavClick(e, link.href)}
+                  className="text-base font-medium text-gray-700 hover:text-orange-500 transition-colors py-2 cursor-pointer"
                 >
                   {link.name}
-                </Link>
+                </a>
               ))}
-              <Link
-                href="/contact"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="bg-gradient-to-r from-orange-500 to-pink-500 text-white px-6 py-3 rounded-full font-semibold text-center hover:shadow-lg transition-all"
+              <a
+                href="#contact"
+                onClick={(e) => handleNavClick(e, '#contact')}
+                className="bg-gradient-to-r from-orange-500 to-pink-500 text-white px-6 py-3 rounded-full font-semibold text-center hover:shadow-lg transition-all cursor-pointer"
               >
                 Book Visit
-              </Link>
+              </a>
             </div>
           </div>
         )}
