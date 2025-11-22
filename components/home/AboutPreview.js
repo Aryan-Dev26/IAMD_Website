@@ -1,10 +1,19 @@
 'use client';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { Heart, Users, Award, Target, Building2, Sparkles } from 'lucide-react';
 import { placeholderImages } from '@/lib/utils/imageHelpers';
 
 const AboutPreview = () => {
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
   const features = [
     {
       icon: Heart,
@@ -33,11 +42,17 @@ const AboutPreview = () => {
   ];
 
   return (
-    <section id = "about" className="relative bg-gradient-to-b from-slate-900 to-slate-800 py-20">
-      {/* Background Decoration */}
+    <section id = "about" className="relative bg-gradient-to-b from-slate-900 to-slate-800 py-20 overflow-hidden">
+      {/* Background Decoration with Parallax */}
       <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-20 right-20 w-96 h-96 bg-orange-500 rounded-full filter blur-3xl"></div>
-        <div className="absolute bottom-20 left-20 w-96 h-96 bg-blue-500 rounded-full filter blur-3xl"></div>
+        <div 
+          className="absolute top-20 right-20 w-96 h-96 bg-orange-500 rounded-full filter blur-3xl transition-transform"
+          style={{ transform: `translateY(${scrollY * 0.1}px)` }}
+        ></div>
+        <div 
+          className="absolute bottom-20 left-20 w-96 h-96 bg-blue-500 rounded-full filter blur-3xl transition-transform"
+          style={{ transform: `translateY(${-scrollY * 0.1}px)` }}
+        ></div>
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

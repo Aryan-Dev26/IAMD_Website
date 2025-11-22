@@ -120,25 +120,25 @@ const Footer = () => {
               <div className="flex space-x-3">
                 <a
                   href="#"
-                  className="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center hover:bg-orange-500 transition-colors"
+                  className="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center hover:bg-orange-500 hover:scale-110 hover:rotate-12 transition-all duration-300"
                 >
                   <Facebook className="w-4 h-4" />
                 </a>
                 <a
                   href="#"
-                  className="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center hover:bg-orange-500 transition-colors"
+                  className="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center hover:bg-orange-500 hover:scale-110 hover:rotate-12 transition-all duration-300"
                 >
                   <Twitter className="w-4 h-4" />
                 </a>
                 <a
                   href="#"
-                  className="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center hover:bg-orange-500 transition-colors"
+                  className="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center hover:bg-orange-500 hover:scale-110 hover:rotate-12 transition-all duration-300"
                 >
                   <Instagram className="w-4 h-4" />
                 </a>
                 <a
                   href="#"
-                  className="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center hover:bg-orange-500 transition-colors"
+                  className="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center hover:bg-orange-500 hover:scale-110 hover:rotate-12 transition-all duration-300"
                 >
                   <Linkedin className="w-4 h-4" />
                 </a>
