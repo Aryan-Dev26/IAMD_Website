@@ -1,6 +1,8 @@
 'use client';
 import React from 'react';
+import Image from 'next/image';
 import { Heart, Users, Award, Target, Building2, Sparkles } from 'lucide-react';
+import { placeholderImages } from '@/lib/utils/imageHelpers';
 
 const AboutPreview = () => {
   const features = [
@@ -91,14 +93,14 @@ const AboutPreview = () => {
 
           {/* Right - Image */}
           <div className="relative group">
-            <div className="aspect-[4/3] bg-gradient-to-br from-orange-600 via-pink-600 to-purple-600 rounded-2xl overflow-hidden relative">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center text-white p-8">
-                  <Award className="w-20 h-20 mx-auto mb-4 opacity-50" />
-                  <p className="text-sm opacity-75">IAMD Facility - Solan, HP</p>
-                  <p className="text-xs opacity-50 mt-2">Placeholder: Will be replaced with real image</p>
-                </div>
-              </div>
+            <div className="aspect-[4/3] rounded-2xl overflow-hidden relative">
+              <Image
+                src={placeholderImages.facility.exterior}
+                alt="IAMD Facility in Solan, Himachal Pradesh"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
             </div>
             

@@ -1,6 +1,8 @@
 'use client';
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { ArrowRight, Heart, Users, Award, MapPin } from 'lucide-react';
+import { placeholderImages } from '@/lib/utils/imageHelpers';
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -72,11 +74,15 @@ const Hero = () => {
             <div className="grid grid-cols-2 gap-3">
               {/* Main Image */}
               <div className="col-span-2 relative group overflow-hidden rounded-xl">
-                <div className="aspect-video bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center">
-                  <div className="text-center text-white p-6">
-                    <Users className="w-12 h-12 mx-auto mb-3 opacity-50" />
-                    <p className="text-xs opacity-75">Rehabilitation Therapy Session</p>
-                  </div>
+                <div className="aspect-video relative">
+                  <Image
+                    src={placeholderImages.hero.therapy}
+                    alt="Rehabilitation Therapy Session at IAMD"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    priority
+                  />
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
                   <div className="text-white">
@@ -88,8 +94,14 @@ const Hero = () => {
 
               {/* Small Images */}
               <div className="relative group overflow-hidden rounded-xl">
-                <div className="aspect-square bg-gradient-to-br from-orange-600 to-pink-600 flex items-center justify-center">
-                  <Award className="w-10 h-10 text-white opacity-50" />
+                <div className="aspect-square relative">
+                  <Image
+                    src={placeholderImages.team.therapist}
+                    alt="Expert Medical Team"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 50vw, 25vw"
+                  />
                 </div>
                 <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                   <p className="text-white text-xs font-semibold px-4 text-center">Expert Team</p>
@@ -97,8 +109,14 @@ const Hero = () => {
               </div>
 
               <div className="relative group overflow-hidden rounded-xl">
-                <div className="aspect-square bg-gradient-to-br from-green-600 to-teal-600 flex items-center justify-center">
-                  <MapPin className="w-10 h-10 text-white opacity-50" />
+                <div className="aspect-square relative">
+                  <Image
+                    src={placeholderImages.facility.exterior}
+                    alt="IAMD Facility in Solan, HP"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 50vw, 25vw"
+                  />
                 </div>
                 <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                   <p className="text-white text-xs font-semibold px-4 text-center">Solan, HP</p>
