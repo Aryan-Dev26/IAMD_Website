@@ -222,16 +222,12 @@ const Hero = () => {
                 src={placeholderImages.team.therapist}
                 alt="Expert Medical Team"
                 label="Expert Team"
-                href="/team"
-                clickable={true}
               />
 
               <SmallImageCard
                 src={placeholderImages.facility.exterior}
                 alt="IAMD Facility in Solan, HP"
                 label="Solan, HP"
-                href="#facility"
-                clickable={true}
               />
             </div>
 
@@ -262,7 +258,7 @@ const Hero = () => {
 };
 
 // Small Image Card Component with Tilt Effect
-const SmallImageCard = ({ src, alt, label, href, clickable = false }) => {
+const SmallImageCard = ({ src, alt, label }) => {
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const cardRef = useRef(null);
 
@@ -286,29 +282,11 @@ const SmallImageCard = ({ src, alt, label, href, clickable = false }) => {
     setTilt({ x: 0, y: 0 });
   };
 
-  const handleClick = () => {
-    if (clickable && href) {
-      if (href.startsWith('#')) {
-        // Smooth scroll to section
-        const element = document.querySelector(href);
-        if (element) {
-          const offset = 80;
-          const elementPosition = element.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.pageYOffset - offset;
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-          });
-        }
-      } else {
-        // Navigate to page
-        window.location.href = href;
-      }
-    }
-  };
-
-  const CardContent = (
-    <>
+  return (
+    <div 
+      className="relative group overflow-hidden rounded-xl"
+      style={{ perspective: '1000px' }}
+    >
       <div
         ref={cardRef}
         className="aspect-square relative transition-transform duration-300 ease-out"
@@ -327,24 +305,9 @@ const SmallImageCard = ({ src, alt, label, href, clickable = false }) => {
           sizes="(max-width: 768px) 50vw, 25vw"
         />
       </div>
-      <div className={`absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center ${clickable ? 'cursor-pointer' : ''}`}>
-        <div className="text-center">
-          <p className="text-white text-xs font-semibold px-4">{label}</p>
-          {clickable && (
-            <p className="text-white/80 text-[10px] mt-1">Click to view</p>
-          )}
-        </div>
+      <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+        <p className="text-white text-xs font-semibold px-4 text-center">{label}</p>
       </div>
-    </>
-  );
-
-  return (
-    <div 
-      className={`relative group overflow-hidden rounded-xl ${clickable ? 'cursor-pointer' : ''}`}
-      style={{ perspective: '1000px' }}
-      onClick={handleClick}
-    >
-      {CardContent}
     </div>
   );
 };
